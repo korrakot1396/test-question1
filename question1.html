@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1</title>
+</head>
+<body>
+    <div id="flex-box">
+        <div id="box1">
+            <input id="searchTxt" placeholder="add your text here..." type="number">
+            <div id='searchValue'></div>
+        </div>
+        
+        <div id="box2">
+            <select id="language" onChange="update()">
+                <option value="" disabled selected>Select</option>
+                <option value="isPrime">isPrime</option>
+                <option value="isFibonacci">isFibonacci</option>
+            </select>
+        </div>
+       
+    
+        <div id="box3">
+            <div id="condition">
+                false
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        document.getElementsByTagName("BODY")[0].style.overflowX = "auto";
+        document.getElementById("flex-box").style.display = "flex";
+        document.getElementById("box1").setAttribute("style", "min-width: 200px; height: 100vh; border:1px solid black");
+        document.getElementById("box2").setAttribute("style", "width:100%;  min-width: 100px; height: 100vh; border:1px solid black");
+        document.getElementById("box3").setAttribute("style", "min-width: 300px; height: 100vh; border:1px solid black");
+
+        window.onkeyup = keyup;
+
+        let inputTextValue;
+        let selectValue
+
+        function keyup(e) {
+            inputTextValue = e.target.value;
+
+            checkCondition()
+        }
+
+        function update() {
+            const select = document.getElementById('language');
+            const option = select.options[select.selectedIndex];
+            selectValue = option.value
+
+            checkCondition()
+		}
+
+
+        function checkCondition() {
+
+            let isPrime = true;
+            if (inputTextValue == 1) {
+                isPrime = false;
+            } else if (inputTextValue > 1) {
+                for (let i = 2; i < inputTextValue; i++) {
+                    if (inputTextValue % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+            }else {
+                isPrime = false;
+            }
+            
+            let isFibonacci = false;
+            var test1 = Math.sqrt(5 * Math.pow(inputTextValue, 2) + 4);
+            var test2 = Math.sqrt(5 * Math.pow(inputTextValue, 2) - 4);
+
+            if (test1 == Math.floor(test1) || test2 == Math.floor(test2)){
+                isFibonacci = true;
+            } else{
+                isFibonacci = false;
+            }
+
+            const condition = document.getElementById('condition');
+            if(isPrime && selectValue === "isPrime"){
+                condition.innerHTML="true"
+            }else if (isFibonacci && selectValue == "isFibonacci"){
+                condition.innerHTML="true"
+            } else{
+                condition.innerHTML="false"
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>
